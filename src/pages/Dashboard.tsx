@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { User, Mail, Shield, CreditCard, Settings, BarChart3 } from 'lucide-react';
+import ContentFeed from '../components/ContentFeed';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -120,64 +121,71 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Settings className="w-5 h-5" />
-                <span>Account Settings</span>
-              </CardTitle>
-              <CardDescription>
-                Manage your profile and preferences
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="outline" className="w-full">
-                Manage Settings
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Content Feed */}
+          <div className="lg:col-span-2">
+            <ContentFeed />
+          </div>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <CreditCard className="w-5 h-5" />
-                <span>Billing & Plans</span>
-              </CardTitle>
-              <CardDescription>
-                View and manage your subscription
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to="/billing">
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  View Billing
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          {user.role === 'admin' && (
+          {/* Action Cards */}
+          <div className="space-y-6">
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Shield className="w-5 h-5" />
-                  <span>Admin Panel</span>
+                  <Settings className="w-5 h-5" />
+                  <span>Account Settings</span>
                 </CardTitle>
                 <CardDescription>
-                  Access administrative tools
+                  Manage your profile and preferences
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link to="/admin">
-                  <Button variant="outline" className="w-full border-purple-200 text-purple-600 hover:bg-purple-50">
-                    Open Admin Panel
+                <Button variant="outline" className="w-full">
+                  Manage Settings
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <CreditCard className="w-5 h-5" />
+                  <span>Billing & Plans</span>
+                </CardTitle>
+                <CardDescription>
+                  View and manage your subscription
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link to="/billing">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    View Billing
                   </Button>
                 </Link>
               </CardContent>
             </Card>
-          )}
+
+            {user.role === 'admin' && (
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Shield className="w-5 h-5" />
+                    <span>Admin Panel</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Access administrative tools
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Link to="/admin">
+                    <Button variant="outline" className="w-full border-purple-200 text-purple-600 hover:bg-purple-50">
+                      Open Admin Panel
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </div>
       </div>
     </div>
